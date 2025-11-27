@@ -22793,7 +22793,7 @@
                         children:
                           e.image &&
                           (0, St.jsx)("img", {
-                            src: "https://frontend-0833.onrender.com/".concat(
+                            src: "https://genvision-26.onrender.com/".concat(
                               e.image
                             ),
                             alt: e.name,
@@ -22997,7 +22997,7 @@
                             className: "guest-img-wrapper",
                             children: [
                               (0, St.jsx)("img", {
-                                src: "https://frontend-0833.onrender.com/".concat(
+                                src: "https://genvision-26.onrender.com/".concat(
                                   e.image
                                 ),
                                 alt: e.name,
@@ -23073,7 +23073,7 @@
                             children:
                               e.image &&
                               (0, St.jsx)("img", {
-                                src: "https://frontend-0833.onrender.com/".concat(
+                                src: "https://genvision-26.onrender.com/".concat(
                                   e.image
                                 ),
                                 alt: e.name,
@@ -24487,7 +24487,7 @@
           !e)
         )
           return (0, St.jsx)("p", { children: "Loading..." });
-        const c = "https://frontend-0833.onrender.com/",
+        const c = "https://genvision-26.onrender.com/",
           d = (e) => {
             let { src: n, alt: r, style: o, className: a } = e;
             const [i, l] = (0, t.useState)(!1),
@@ -24662,7 +24662,7 @@
                           children:
                             e.image &&
                             (0, St.jsx)("img", {
-                              src: "https://frontend-0833.onrender.com/".concat(
+                              src: "https://genvision-26.onrender.com/".concat(
                                 e.image
                               ),
                               alt: e.name,
@@ -25033,7 +25033,7 @@
                       children: [
                         e.image &&
                           (0, St.jsx)("img", {
-                            src: "https://frontend-0833.onrender.com/".concat(
+                            src: "https://genvision-26.onrender.com/".concat(
                               e.image
                             ),
                             className: "card-img-top",
@@ -25111,7 +25111,7 @@
                     {
                       file: null,
                       logoPreview: e.logo
-                        ? "https://frontend-0833.onrender.com/".concat(e.logo)
+                        ? "https://genvision-26.onrender.com/".concat(e.logo)
                         : "",
                     }
                   )
@@ -25179,7 +25179,7 @@
                     e.poster &&
                       !r &&
                       (0, St.jsx)("img", {
-                        src: "https://frontend-0833.onrender.com/".concat(
+                        src: "https://genvision-26.onrender.com/".concat(
                           e.poster
                         ),
                         alt: "Poster",
@@ -25244,7 +25244,7 @@
                           (0, St.jsx)("img", {
                             src: t.startsWith("blob:")
                               ? t
-                              : "https://frontend-0833.onrender.com/".concat(t),
+                              : "https://genvision-26.onrender.com/".concat(t),
                             alt: "Gallery ".concat(r),
                             className: "rounded shadow-sm",
                             style: {
@@ -25828,7 +25828,7 @@
                       children: [
                         e.image &&
                           (0, St.jsx)("img", {
-                            src: "https://frontend-0833.onrender.com/".concat(
+                            src: "https://genvision-26.onrender.com/".concat(
                               e.image
                             ),
                             className: "card-img-top",
@@ -26053,7 +26053,7 @@
                       children: [
                         e.image &&
                           (0, St.jsx)("img", {
-                            src: "https://frontend-0833.onrender.com/".concat(
+                            src: "https://genvision-26.onrender.com/".concat(
                               e.image
                             ),
                             className: "card-img-top",
