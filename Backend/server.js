@@ -26,7 +26,7 @@ import paymentRoutes from "./routes/payment.js";
 
 dotenv.config();
 const app = express();
-app.use(cors({ origin: process.env.FRONTEND_URL }));
+// app.use(cors({ origin: process.env.FRONTEND_URL }));
 
 app.use(express.static(path.join(__dirname, "../Frontend/build")));
 app.use(cors());
