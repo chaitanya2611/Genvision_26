@@ -43,10 +43,10 @@ const participantSchema = new mongoose.Schema({
       ref: "Event"
     }
   ],
-  paymentId: String,
-  orderId: String,
-  status: { type: String, enum: ["paid","failed"], default: "paid" },
-  amount: Number,
+  // paymentId: String,
+  // orderId: String,
+  // status: { type: String, enum: ["paid","failed"], default: "paid" },
+  // amount: Number,
 });
 
 export default mongoose.model("Participant", participantSchema);
