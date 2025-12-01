@@ -5,13 +5,11 @@ import fs from "fs";
 
 // ✅ Multer storage for poster, gallery, sponsor logos
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    const dir = "uploads/about/";
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    cb(null, dir);
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // store in /uploads folder
   },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + "-" + Math.round(Math.random() * 1e9) + path.extname(file.originalname));
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
   },
 });
 
@@ -48,12 +46,12 @@ export const updateAbout = async (req, res) => {
 
     // Poster
     if (req.files?.poster) {
-      about.poster = "/uploads/about/" + req.files.poster.filename;
+      about.poster = "/uploads/" + req.files.poster.filename;
     }
 
     // Gallery (append new)
     if (req.files?.gallery) {
-      const galleryFiles = req.files.gallery.map((f) => "/uploads/about/" + f.filename);
+      const galleryFiles = req.files.gallery.map((f) => "/uploads/" + f.filename);
       about.gallery = about.gallery.concat(galleryFiles);
     }
 
@@ -61,7 +59,7 @@ export const updateAbout = async (req, res) => {
     let sponsorsData = JSON.parse(sponsors || "[]");
     if (req.files?.sponsorFiles) {
       req.files.sponsorFiles.forEach((file, idx) => {
-        sponsorsData[idx].logo = "/uploads/about/" + file.filename;
+        sponsorsData[idx].logo = "/uploads/" + file.filename;
       });
     }
     about.sponsors = sponsorsData;
