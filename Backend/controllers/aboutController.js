@@ -48,7 +48,7 @@ export const updateAbout = async (req, res) => {
 
     // Poster
     if (req.files?.poster) {
-      about.poster = "/uploads/about/" + req.files.poster[0].filename;
+      about.poster = "/uploads/about/" + req.files.poster.filename;
     }
 
     // Gallery (append new)
