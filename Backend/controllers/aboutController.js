@@ -45,9 +45,9 @@ export const updateAbout = async (req, res) => {
     if (!about) about = new About();
 
     // Poster
-    if (req.files?.poster) {
-      about.poster = "/uploads/" + req.files.poster.filename;
-    }
+    if (req.files?.poster && req.files.poster.length > 0) {
+  about.poster = "/uploads/" + req.files.poster[0].filename;
+}
 
     // Gallery (append new)
     if (req.files?.gallery) {
