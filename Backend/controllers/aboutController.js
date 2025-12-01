@@ -56,13 +56,16 @@ export const updateAbout = async (req, res) => {
     }
 
     // Sponsors
-    let sponsorsData = JSON.parse(sponsors || "[]");
-    if (req.files?.sponsorFiles) {
-      req.files.sponsorFiles.forEach((file, idx) => {
-        sponsorsData[idx].logo = "/uploads/" + file.filename;
-      });
-    }
-    about.sponsors = sponsorsData;
+let sponsorsData = JSON.parse(sponsors || "[]");
+
+if (req.files?.sponsorFiles) {
+  req.files.sponsorFiles.forEach((file, idx) => {
+    if (!sponsorsData[idx]) sponsorsData[idx] = {};
+    sponsorsData[idx].logo = "/uploads/" + file.filename;
+  });
+}
+
+about.sponsors = sponsorsData;
 
     // Schedule + description
     about.schedule = JSON.parse(schedule || "[]");
