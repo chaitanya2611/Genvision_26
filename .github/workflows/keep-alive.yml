@@ -1,0 +1,13 @@
+name: keep-render-awake
+
+on:
+  schedule:
+    - cron: "*/10 * * * *" # दर 10 मिनिटांनी रन होईल
+  workflow_dispatch: # तू manually पण चालवू शकतोस
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render server
+        run: curl -s https://genvision-26.onrender.com
