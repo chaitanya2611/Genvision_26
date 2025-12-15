@@ -95,7 +95,7 @@ export default function ManageStudents() {
                     "-"
                   )}
                 </td>
-                <td>{s.registration_id}</td>
+                <td>{s.registrationId}</td>
                 <td className="d-flex gap-2">
                   <button
                     onClick={() => handleEdit(s)}

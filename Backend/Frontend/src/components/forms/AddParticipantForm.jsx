@@ -111,7 +111,7 @@ export default function ManageParticipants() {
                 <td>{p.payment_status}</td>
                 <td>{p.accommodation_status}</td>
                 <td>{p.travel_status}</td>
-                <td>{p.registration_id}</td>
+                <td>{p.registrationId}</td>
 
                 <td className="d-flex gap-2">
                   <button

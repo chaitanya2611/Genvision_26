@@ -27,7 +27,7 @@ export const registerStudent = async (req, res) => {
     const { name, email, phone, place, college, department, year, social_link } = req.body;
 
     // auto-generate registration ID (example: GVSTU1234)
-    const registration_id = "GVSTU" + Math.floor(1000 + Math.random() * 9000);
+    const registrationId = "GVSTU" + Math.floor(1000 + Math.random() * 9000);
 
     const student = new Student({
       name,
@@ -38,7 +38,7 @@ export const registerStudent = async (req, res) => {
       department,
       year,
       social_link,
-      registration_id,
+      registrationId,
     });
 
     await student.save();

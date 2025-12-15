@@ -6,6 +6,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import cron from "cron";
 import https from "https";
+import startAutoSync from "./middleware/autoSync.js";
+
+
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -23,6 +26,9 @@ import coordinatorRoutes from "./routes/coordinators.js";
 import adminRoutes from "./routes/admin.js";
 import aboutRouter from "./routes/about.js";
 import studentRoutes from "./routes/student.js";
+import authRoutes from "./routes/auth_routes.js";
+import forgotPasswordRoutes from "./routes/forgotPassword.js";
+import passwordRoutes from "./routes/password_routes.js";
 // import paymentRoutes from "./routes/payment.js";
 
 
@@ -39,9 +45,13 @@ app.use("/api/participants", participantRoutes);
 app.use("/api/students", studentRoutes);
 app.use("/api/guests", guestRoutes);
 app.use("/api/coordinators", coordinatorRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/forgot-password", forgotPasswordRoutes);
+app.use("/api/password", passwordRoutes);
 app.use("/api/admin", adminRoutes);
 app.use("/api/about", aboutRouter);
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+startAutoSync();
 
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB connected"))

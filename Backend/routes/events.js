@@ -8,6 +8,7 @@ import express from "express";
 // } from "../controllers/eventController.js";
 import Event from "../models/Event.js";
 import upload from "../middleware/upload.js";
+import Participant from "../models/Participant.js";
 
 const router = express.Router();
 
@@ -52,6 +53,18 @@ router.put("/:id", upload.single("image"), async (req, res) => {
     res.json(event);
   } catch (err) {
     res.status(500).json({ message: err.message });
+  }
+});
+
+router.get("/:id/participants", async (req, res) => {
+  const eventId = req.params.id;
+
+  try {
+    const participants = await Participant.find({ events: eventId }).select("-password");
+    res.json(participants);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

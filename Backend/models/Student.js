@@ -15,7 +15,7 @@ const studentSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
   social_link: String,
 
-  registration_id: {
+  registrationId: {
     type: String,
     unique: true
   },

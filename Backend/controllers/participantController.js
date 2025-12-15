@@ -1,42 +1,55 @@
 import Participant from "../models/Participant.js";
 import Event from "../models/Event.js";
 
-// 🧠 Get all participants
+/* =====================================================
+   🧠 GET ALL PARTICIPANTS (with populated events)
+===================================================== */
 export const getAllParticipants = async (req, res) => {
   try {
-    const participants = await Participant.find().populate("events", "name");
+    const participants = await Participant.find()
+      .populate("events", "name");
+
     res.json(participants);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
 
-// ➕ Add a new participant
+/* =====================================================
+   ➕ ADD NEW PARTICIPANT
+===================================================== */
 export const addParticipant = async (req, res) => {
   try {
     const participant = new Participant({
-      name: req.body.name,
+      // 🔥 FIELD NAMES MUST MATCH FRONTEND
+      fullName: req.body.fullName,
       email: req.body.email,
-      phone: req.body.phone,
-      college: req.body.college,
+      mobileNumber: req.body.mobileNumber,
+      institution: req.body.institution,
       department: req.body.department,
       year: req.body.year,
-      events: req.body.events, // array of event IDs
+
+      events: req.body.events || [], // array of event IDs
       social_link: req.body.social_link,
-      payment_status: req.body.payment_status || "pending",
-      accommodation_status: req.body.accommodation_status || "pending",
-      travel_status: req.body.travel_status || "pending",
+
+      paymentStatus: req.body.paymentStatus || "pending",
+      accommodationRequired: req.body.accommodationRequired || false,
+      accommodationStatus: req.body.accommodationStatus || "pending",
+      travelStatus: req.body.travelStatus || "pending",
+
       registration_id:
         "GV" + Math.floor(100000 + Math.random() * 900000),
     });
 
     const savedParticipant = await participant.save();
 
-    if (req.body.events && req.body.events.length > 0) {
+    // 🔗 Link participant to events
+    if (savedParticipant.events.length > 0) {
       await Event.updateMany(
-        { _id: { $in: req.body.events } },
+        { _id: { $in: savedParticipant.events } },
         { $addToSet: { participants: savedParticipant._id } }
-      );}
+      );
+    }
 
     res.status(201).json(savedParticipant);
   } catch (err) {
@@ -44,26 +57,52 @@ export const addParticipant = async (req, res) => {
   }
 };
 
-// ✏️ Update participant
+/* =====================================================
+   ✏️ UPDATE PARTICIPANT (ADMIN SAFE UPDATE)
+===================================================== */
 export const updateParticipant = async (req, res) => {
   try {
     const updated = await Participant.findByIdAndUpdate(
       req.params.id,
-      req.body,
+      {
+        paymentStatus: req.body.paymentStatus,
+        accommodationStatus: req.body.accommodationStatus,
+        travelStatus: req.body.travelStatus,
+      },
       { new: true }
     );
-    if (!updated) return res.status(404).json({ message: "Participant not found" });
+
+    if (!updated) {
+      return res
+        .status(404)
+        .json({ message: "Participant not found" });
+    }
+
     res.json(updated);
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 };
 
-// ❌ Delete participant
+/* =====================================================
+   ❌ DELETE PARTICIPANT
+===================================================== */
 export const deleteParticipant = async (req, res) => {
   try {
     const deleted = await Participant.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ message: "Participant not found" });
+
+    if (!deleted) {
+      return res
+        .status(404)
+        .json({ message: "Participant not found" });
+    }
+
+    // 🔥 Optional: remove participant from events
+    await Event.updateMany(
+      { participants: deleted._id },
+      { $pull: { participants: deleted._id } }
+    );
+
     res.json({ message: "Participant deleted successfully" });
   } catch (err) {
     res.status(400).json({ message: err.message });

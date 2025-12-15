@@ -71,6 +71,7 @@ about.sponsors = sponsorsData;
     about.schedule = JSON.parse(schedule || "[]");
     about.description = description;
 
+    
     await about.save();
     res.json({ message: "About updated successfully", about });
   } catch (err) {

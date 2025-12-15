@@ -25484,7 +25484,7 @@
                               children: e.accommodation_status,
                             }),
                             (0, St.jsx)("td", { children: e.travel_status }),
-                            (0, St.jsx)("td", { children: e.registration_id }),
+                            (0, St.jsx)("td", { children: e.registrationId }),
                             (0, St.jsxs)("td", {
                               className: "d-flex gap-2",
                               children: [
